@@ -1,17 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager instance;
 
-    public float speed;
+    
+    public float score = 0;
     [SerializeField] float baseSpeed = 1f;
+    
 
     [SerializeField] float step = 0.1f;
-    [SerializeField] Transform enemyPrefab = null;    
+    [SerializeField] Transform enemyPrefab = null;
+    [SerializeField] TextMeshProUGUI scoreUi;
+    [SerializeField] TextMeshProUGUI waveUi;
 
+    private float speed;
     private List<Enemy> enemies;
     private int wavesActivated = 0;
     private bool runEnemyMove = true;
@@ -39,11 +45,13 @@ public class EnemyManager : MonoBehaviour
             {
                 speed = baseSpeed + (wavesActivated * step);
                 Player.instance.LevelUp();
-                CreateWave();
+                CreateWave(1);
                 wavesActivated++;
+                waveUi.text = wavesActivated.ToString();
             }
             else
             {
+                scoreUi.text = score.ToString();
                 MoveEnemies(speed);
             }
         }
@@ -51,17 +59,26 @@ public class EnemyManager : MonoBehaviour
     }
 
 
-    private void CreateWave()
+    private void CreateWave(int depth)
     {
-        int numOfEnemiesToSpawn = Random.Range(3, 10);
-        Vector2 location = new Vector2(-Mathf.Floor(GameManager.instance.HalfScreenWidthInUnits), Mathf.Floor(GameManager.instance.ScreenHeightInUnits));
+        if (depth <= 0)
+        {
+            depth = 1;
+        }
+
+        if (depth > GameManager.instance.ScreenHeightInUnits - 3)
+        {
+            depth = Mathf.FloorToInt(GameManager.instance.ScreenHeightInUnits) - 3;
+        }
+
+        int numOfEnemiesToSpawn = Mathf.FloorToInt(GameManager.instance.HalfScreenWidthInUnits);
+        Vector2 location = new Vector2(-Mathf.Floor(GameManager.instance.HalfScreenWidthInUnits), Mathf.Floor(GameManager.instance.ScreenHeightInUnits) - 2); //To Clear the score bar
         for (int i = 0; i < numOfEnemiesToSpawn; i++)
         {
             Transform newEnemy = Instantiate(enemyPrefab);
             enemies.Add(newEnemy.GetComponent<Enemy>());
             newEnemy.position = location;
             location.x++;
-            
         }
     }
 
