@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -15,8 +17,11 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] float fireDelay = 3f;
     [SerializeField] float minFireDelay = 0.5f;
     [SerializeField] int minimumBarricadeWidth = 16; //This includes 2 blocks on either side for padding
+    [Range(0, 1)]
+    [SerializeField] float randomEnemyChance = 0.1f;
     
     [SerializeField] Transform[] enemyPrefabs = null;
+    [SerializeField] Transform randomEnemyPrefab = null;
 
     [SerializeField] Transform barricadeBlockPrefab;
 
@@ -47,6 +52,7 @@ public class EnemyManager : MonoBehaviour
     private void Start()
     {
         CreateBarricades(3);
+        StartCoroutine(RandomEnemySpawn());
     }
 
     private void Update()
@@ -190,4 +196,33 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
+
+    private IEnumerator RandomEnemySpawn()
+    {
+        bool isLeftToRight = false;
+        while (true)
+        {
+            if (Random.Range(0f, 1f) < randomEnemyChance)
+            {
+                Vector3 location = Vector3.zero;
+                location.y = GameManager.instance.ScreenHeightInUnits - 1;
+                if (Random.Range(0f, 1f) <= 0.5f)
+                {
+                    location.x += GameManager.instance.HalfScreenWidthInUnits;
+                    isLeftToRight = false;
+                }
+                else
+                {
+                    location.x -= GameManager.instance.HalfScreenWidthInUnits;
+                    isLeftToRight = true;
+                }
+
+                Transform newEnemy = Instantiate(randomEnemyPrefab);
+                newEnemy.position = location;
+                newEnemy.GetComponent<Enemy>().spawnMoveDirection = isLeftToRight ? Vector3.right : Vector3.left;
+            }
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
 }

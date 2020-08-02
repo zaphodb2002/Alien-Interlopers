@@ -9,6 +9,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] int scoreValue = 10;
     [SerializeField] Shot shotPrefab = null;
 
+    public Vector3 spawnMoveDirection = Vector3.zero;
+
+    private void Update()
+    {
+        if (spawnMoveDirection != Vector3.zero)
+        {
+            MoveAcrossScreen(spawnMoveDirection);
+        }
+    }
+
     public void DoMove(float speed)
     {
         speed = speed * Time.deltaTime;
@@ -42,6 +52,15 @@ public class Enemy : MonoBehaviour
                 transform.position += Vector3.right * speed;
                 isGoingRight = true;
             }
+        }
+    }
+
+    private void MoveAcrossScreen(Vector3 direction)
+    {
+        transform.position += direction * Time.deltaTime;
+        if (Mathf.Abs(transform.position.x) >= GameManager.instance.HalfScreenWidthInUnits + 2)
+        {
+            Destroy(gameObject);
         }
     }
 
