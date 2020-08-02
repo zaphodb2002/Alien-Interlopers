@@ -8,8 +8,17 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] int scoreValue = 10;
     [SerializeField] Shot shotPrefab = null;
+    [SerializeField] AudioClip laserSound;
+    [SerializeField] AudioClip deathSound;
 
     public Vector3 spawnMoveDirection = Vector3.zero;
+
+    private AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -68,6 +77,7 @@ public class Enemy : MonoBehaviour
     {
         var shot = Instantiate(shotPrefab);
         shot.transform.position = transform.position;
+        audioSource.PlayOneShot(laserSound);
         shot.Initialize(Vector3.down, true);
     }
 
@@ -76,6 +86,7 @@ public class Enemy : MonoBehaviour
         Debug.Log(collision.gameObject.name);
         if (collision.gameObject.tag == "Projectile" && !collision.gameObject.GetComponent<Shot>().isEnemyShot)
         {
+            AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, 100f);
             EnemyManager.instance.score += scoreValue;
             EnemyManager.instance.RemoveEnemy(this);
             Destroy(collision.gameObject);

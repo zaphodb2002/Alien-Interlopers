@@ -19,6 +19,10 @@ public class Player : MonoBehaviour
     private float horiz = 0f;
     private float timeSinceLastWeaponFire = 0f;
     [SerializeField] float currentSpeed = 0f;
+    [SerializeField] AudioClip laserSound;
+    [SerializeField] AudioClip deathSound;
+
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -31,6 +35,9 @@ public class Player : MonoBehaviour
             instance = this;
         }
         currentSpeed = playerSpeed;
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = laserSound;
 
     }
 
@@ -69,6 +76,7 @@ public class Player : MonoBehaviour
         Shot shot = Instantiate(shotPrefab);
         shot.transform.position = transform.position;
         shot.Initialize(Vector3.up);
+        audioSource.PlayOneShot(laserSound);
         timeSinceLastWeaponFire += fireDelay;
     }
 
@@ -82,6 +90,7 @@ public class Player : MonoBehaviour
     {
         if (collision.tag == "Projectile" && collision.gameObject.GetComponent<Shot>().isEnemyShot)
         {
+            AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position);
             EnemyManager.instance.DoPlayerDeath();
         }
     }
