@@ -47,4 +47,9 @@ public class GameManager : MonoBehaviour
     {
         LoadLevel(0);
     }
+
+    public void LoadGameOver()
+    {
+        LoadLevel(2);
+    }
 }

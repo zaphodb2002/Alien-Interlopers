@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Projectile")
+        if (collision.tag == "Projectile" && collision.gameObject.GetComponent<Shot>().isEnemyShot)
         {
             EnemyManager.instance.DoPlayerDeath();
         }

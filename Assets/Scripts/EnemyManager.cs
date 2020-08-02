@@ -155,7 +155,7 @@ public class EnemyManager : MonoBehaviour
     public void DoPlayerDeath()
     {
         runEnemyMove = false;
-        GameManager.instance.LoadStartMenu();
+        GameManager.instance.LoadGameOver();
     }
 
     public void RemoveEnemy(Enemy enemy)
