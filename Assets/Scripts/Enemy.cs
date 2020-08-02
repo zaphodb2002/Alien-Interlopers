@@ -5,7 +5,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public bool isGoingRight = false;
+
     [SerializeField] int scoreValue = 10;
+    [SerializeField] Shot shotPrefab = null;
+
     public void DoMove(float speed)
     {
         speed = speed * Time.deltaTime;
@@ -42,10 +45,17 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void Shoot()
+    {
+        var shot = Instantiate(shotPrefab);
+        shot.transform.position = transform.position;
+        shot.Initialize(Vector3.down, true);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log(collision.gameObject.name);
-        if (collision.gameObject.tag == "Projectile")
+        if (collision.gameObject.tag == "Projectile" && !collision.gameObject.GetComponent<Shot>().isEnemyShot)
         {
             EnemyManager.instance.score += scoreValue;
             EnemyManager.instance.RemoveEnemy(this);

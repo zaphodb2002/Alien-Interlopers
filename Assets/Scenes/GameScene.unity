@@ -1097,7 +1097,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   score: 0
   baseSpeed: 1
-  step: 0.75
+  speedStep: 0.1
+  fireStep: 0.1
+  fireDelay: 3
+  minFireDelay: 0.5
   minimumBarricadeWidth: 16
   enemyPrefab: {fileID: 8616100962133287229, guid: 5cf72cd90e930a44a914728a32a7bcb9,
     type: 3}
@@ -1105,6 +1108,59 @@ MonoBehaviour:
     type: 3}
   scoreUi: {fileID: 1510052981}
   waveUi: {fileID: 516461819}
+--- !u!1 &1840647668 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3818306237451699603, guid: d7f14fc40be7057409ce1a536d1f58ca,
+    type: 3}
+  m_PrefabInstance: {fileID: 1709622354936470755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1840647671
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840647668}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &1840647672
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1840647668}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &2042216467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1312,97 +1368,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 519691734174165047, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 519691734174165047, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_Name
-      value: Sprite
-      objectReference: {fileID: 0}
-    - target: {fileID: 689265857267919728, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 00b6abcf07d64c84daf16a4b3cc3d93b,
-        type: 3}
-    - target: {fileID: 2789721637413377876, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: playerSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2789721637413377876, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: shotPrefab
-      value: 
-      objectReference: {fileID: 6317843556443598335, guid: 0a2756f26fa373a4ea0fc0b5c8970def,
-        type: 3}
-    - target: {fileID: 2789721637413377876, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: speedStep
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2789721637413377876, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: fireDelayStep
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 2912645967017944455, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2912645967017944455, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2912645967017944455, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2912645967017944455, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2912645967017944455, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 2912645967017944455, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 2912645967017944455, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2912645967017944455, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 3818306237451699603, guid: d7f14fc40be7057409ce1a536d1f58ca,
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7261769593755690167, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_ShapeTexture
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7261769593755690167, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_DynamicOccludee
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8742998447388243012, guid: d7f14fc40be7057409ce1a536d1f58ca,
         type: 3}
@@ -1458,11 +1427,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8742998447388243012, guid: d7f14fc40be7057409ce1a536d1f58ca,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7f14fc40be7057409ce1a536d1f58ca, type: 3}

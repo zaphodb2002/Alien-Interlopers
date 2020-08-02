@@ -10,7 +10,10 @@ public class EnemyManager : MonoBehaviour
     
     public float score = 0;
     [SerializeField] float baseSpeed = 1f;
-    [SerializeField] float step = 0.1f;
+    [SerializeField] float speedStep = 0.1f;
+    [SerializeField] float fireStep = 0.1f;
+    [SerializeField] float fireDelay = 3f;
+    [SerializeField] float minFireDelay = 0.5f;
     [SerializeField] int minimumBarricadeWidth = 16; //This includes 2 blocks on either side for padding
     
     [SerializeField] Transform enemyPrefab = null;
@@ -39,6 +42,7 @@ public class EnemyManager : MonoBehaviour
 
         enemies = new List<Enemy>();
         speed = baseSpeed;
+        timeSinceLastShot = fireDelay;
     }
     private void Start()
     {
@@ -51,7 +55,12 @@ public class EnemyManager : MonoBehaviour
         {
             if (enemies.Count == 0)
             {
-                speed = baseSpeed + (wavesActivated * step);
+                speed = baseSpeed + (wavesActivated * speedStep);
+                if (fireDelay >= minFireDelay)
+                {
+                    fireDelay -= fireStep;
+                }
+                
                 Player.instance.LevelUp();
                 CreateWave(2);
                 wavesActivated++;
@@ -61,6 +70,7 @@ public class EnemyManager : MonoBehaviour
             {
                 scoreUi.text = score.ToString();
                 MoveEnemies(speed);
+                HandleWeaponsFire();
             }
         }
 
@@ -125,6 +135,20 @@ public class EnemyManager : MonoBehaviour
                 DoPlayerDeath();
             }
 
+        }
+    }
+
+    float timeSinceLastShot = 0f;
+    private void HandleWeaponsFire()
+    {
+        if (timeSinceLastShot >= fireDelay)
+        {
+            enemies[Random.Range(0, enemies.Count - 1)].Shoot();
+            timeSinceLastShot -= fireDelay;
+        }
+        else
+        {
+            timeSinceLastShot += Time.deltaTime;
         }
     }
 

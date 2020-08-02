@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGoingRight: 0
+  scoreValue: 10
+  shotPrefab: {fileID: 7596934924449401760, guid: 0a2756f26fa373a4ea0fc0b5c8970def,
+    type: 3}
 --- !u!61 &784015450664726183
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -81,7 +84,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8616100962133287218}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

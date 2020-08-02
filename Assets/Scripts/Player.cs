@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] float speedStep = 0.5f;
     [SerializeField] float fireDelayStep = 0.05f;
 
-    [SerializeField] Transform shotPrefab = null;
+    [SerializeField] Shot shotPrefab = null;
 
     private float horiz = 0f;
     private float timeSinceLastWeaponFire = 0f;
@@ -66,7 +66,9 @@ public class Player : MonoBehaviour
 
     private void FireWeapon()
     {
-        Instantiate(shotPrefab).position = transform.position;
+        Shot shot = Instantiate(shotPrefab);
+        shot.transform.position = transform.position;
+        shot.Initialize(Vector3.up);
         timeSinceLastWeaponFire += fireDelay;
     }
 
@@ -74,5 +76,13 @@ public class Player : MonoBehaviour
     {
         level++;
         currentSpeed = playerSpeed + (level * speedStep);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Projectile")
+        {
+            EnemyManager.instance.DoPlayerDeath();
+        }
     }
 }

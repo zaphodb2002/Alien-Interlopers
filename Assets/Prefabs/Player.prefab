@@ -130,6 +130,6 @@ MonoBehaviour:
   level: 1
   speedStep: 0.5
   fireDelayStep: 0.05
-  shotPrefab: {fileID: 6317843556443598335, guid: 0a2756f26fa373a4ea0fc0b5c8970def,
+  shotPrefab: {fileID: 7596934924449401760, guid: 0a2756f26fa373a4ea0fc0b5c8970def,
     type: 3}
   currentSpeed: 0
