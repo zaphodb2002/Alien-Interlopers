@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 784015450664726183}
   - component: {fileID: 4075718786971855403}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Enemy 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isGoingRight: 0
-  scoreValue: 10
+  scoreValue: 20
   shotPrefab: {fileID: 7596934924449401760, guid: 0a2756f26fa373a4ea0fc0b5c8970def,
     type: 3}
 --- !u!61 &784015450664726183
@@ -167,7 +167,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c0145e9e9b4f3da4f8f461c159334d12, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6737521181fc8994482f6abc10ca366e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

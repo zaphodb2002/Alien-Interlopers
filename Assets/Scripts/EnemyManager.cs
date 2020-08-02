@@ -16,7 +16,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] float minFireDelay = 0.5f;
     [SerializeField] int minimumBarricadeWidth = 16; //This includes 2 blocks on either side for padding
     
-    [SerializeField] Transform enemyPrefab = null;
+    [SerializeField] Transform[] enemyPrefabs = null;
 
     [SerializeField] Transform barricadeBlockPrefab;
 
@@ -62,7 +62,7 @@ public class EnemyManager : MonoBehaviour
                 }
                 
                 Player.instance.LevelUp();
-                CreateWave(2);
+                CreateWave(3);
                 wavesActivated++;
                 waveUi.text = wavesActivated.ToString();
             }
@@ -85,9 +85,9 @@ public class EnemyManager : MonoBehaviour
             depth = 1;
         }
 
-        if (depth > GameManager.instance.ScreenHeightInUnits - 3)
+        if (depth > 3)
         {
-            depth = Mathf.FloorToInt(GameManager.instance.ScreenHeightInUnits) - 3;
+            depth = 3;
         }
 
         int numOfEnemiesPerRow = Mathf.FloorToInt(GameManager.instance.HalfScreenWidthInUnits);
@@ -101,7 +101,7 @@ public class EnemyManager : MonoBehaviour
         {
             for (int i = 0; i < numOfEnemiesPerRow; i++)
             {
-                Transform newEnemy = Instantiate(enemyPrefab);
+                Transform newEnemy = Instantiate(enemyPrefabs[j]);
                 enemies.Add(newEnemy.GetComponent<Enemy>());
                 newEnemy.position = location;
                 location.x++;

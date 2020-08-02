@@ -1102,8 +1102,10 @@ MonoBehaviour:
   fireDelay: 3
   minFireDelay: 0.5
   minimumBarricadeWidth: 16
-  enemyPrefab: {fileID: 8616100962133287229, guid: 5cf72cd90e930a44a914728a32a7bcb9,
-    type: 3}
+  enemyPrefabs:
+  - {fileID: 8616100962133287229, guid: 5cf72cd90e930a44a914728a32a7bcb9, type: 3}
+  - {fileID: 8616100962133287229, guid: 6b30afc4450b7774a92c98f1edb24f06, type: 3}
+  - {fileID: 8616100962133287229, guid: bbaa17e03a8236547b217083c962f29b, type: 3}
   barricadeBlockPrefab: {fileID: 5089495974872918516, guid: 01f1412ac3e4f6644b8e7c8fdcb1bf37,
     type: 3}
   scoreUi: {fileID: 1510052981}
