@@ -125,21 +125,30 @@ public class EnemyManager : MonoBehaviour
         if (enemies.Count > 0)
         {
             Vector3 move = isGoingRight ? Vector3.right : Vector3.left;
-            
-            if (Mathf.Abs(waveParent.position.x) > (GameManager.instance.HalfScreenWidthInUnits / 2f) + 0.5f)
-            {
-                waveParent.position += Vector3.down;
-                waveParent.position += isGoingRight ? Vector3.left * 0.5f : Vector3.right * 0.5f;
 
-                isGoingRight = !isGoingRight;
+            foreach (Transform child in waveParent)
+            {
+                if (child.position.y <= 0)
+                {
+                    DoPlayerDeath();
+                    break;
+                }
+
+                if (Mathf.Abs(child.position.x) > GameManager.instance.HalfScreenWidthInUnits - 0.5f)
+                {
+                    waveParent.position += Vector3.down;
+                    waveParent.position += isGoingRight ? Vector3.left * 0.5f : Vector3.right * 0.5f;
+
+                    isGoingRight = !isGoingRight;
+                    break;
+                }
+
+                
             }
+
+            
             
             waveParent.position += move * speed * Time.deltaTime;
-
-            if (waveParent.position.y <= 0)
-            {
-                DoPlayerDeath();
-            }
 
         }
     }
