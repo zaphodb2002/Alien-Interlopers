@@ -91,6 +91,7 @@ public class Player : MonoBehaviour
         if (collision.tag == "Projectile" && collision.gameObject.GetComponent<Shot>().isEnemyShot)
         {
             AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position);
+            EnemyManager.instance.ExplodeAt(transform.position);
             EnemyManager.instance.DoPlayerDeath();
         }
     }

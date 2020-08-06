@@ -86,6 +86,7 @@ public class Enemy : MonoBehaviour
         Debug.Log(collision.gameObject.name);
         if (collision.gameObject.tag == "Projectile" && !collision.gameObject.GetComponent<Shot>().isEnemyShot)
         {
+            EnemyManager.instance.ExplodeAt(transform.position);
             AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, 100f);
             EnemyManager.instance.score += scoreValue;
             EnemyManager.instance.RemoveEnemy(this);

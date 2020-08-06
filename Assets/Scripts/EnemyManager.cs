@@ -29,6 +29,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreUi;
     [SerializeField] TextMeshProUGUI waveUi;
 
+    [SerializeField] Explosion explosionPrefab;
+
     private float speed;
     private List<Enemy> enemies;
     private int wavesActivated = 0;
@@ -80,6 +82,11 @@ public class EnemyManager : MonoBehaviour
             }
         }
 
+    }
+
+    public void ExplodeAt(Vector3 position)
+    {
+        Instantiate(explosionPrefab, position, Quaternion.identity);
     }
 
     Transform waveParent = null;

@@ -1113,6 +1113,8 @@ MonoBehaviour:
     type: 3}
   scoreUi: {fileID: 1510052981}
   waveUi: {fileID: 516461819}
+  explosionPrefab: {fileID: -2003160204587535021, guid: 116698e67e0bfb145bf463ac8b61b1c8,
+    type: 3}
 --- !u!1 &2042216467
 GameObject:
   m_ObjectHideFlags: 0
