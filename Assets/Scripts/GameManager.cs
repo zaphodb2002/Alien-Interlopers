@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(AudioSource))] 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -14,6 +15,8 @@ public class GameManager : MonoBehaviour
     public float ScreenHeightInUnits { get => screenHeightInUnits; }
     public float ScreenWidthInUnits { get => screenWidthInUnits; }
     public float HalfScreenWidthInUnits { get => halfScreenWidthInUnits; set => halfScreenWidthInUnits = value; }
+
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -31,6 +34,8 @@ public class GameManager : MonoBehaviour
         screenHeightInUnits = Camera.main.orthographicSize * 2f;
         screenWidthInUnits = screenHeightInUnits * (Screen.width / (float)Screen.height);
         HalfScreenWidthInUnits = screenWidthInUnits / 2f;
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void LoadLevel(int index)
@@ -51,5 +56,17 @@ public class GameManager : MonoBehaviour
     public void LoadGameOver()
     {
         LoadLevel(2);
+    }
+
+    public void ToggleMusic(bool on)
+    {
+        if (on)
+        {
+            audioSource.Play();
+        }
+        else
+        {
+            audioSource.Stop();
+        }
     }
 }

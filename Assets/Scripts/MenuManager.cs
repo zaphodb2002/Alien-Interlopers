@@ -7,6 +7,7 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] Button newGameButton;
     [SerializeField] Button startGameButton;
+    [SerializeField] Toggle musicToggle;
 
     private void Start()
     {
@@ -19,7 +20,10 @@ public class MenuManager : MonoBehaviour
         {
             startGameButton.onClick.AddListener(GameManager.instance.LoadFirstLevel);
         }
-
+        if (musicToggle != null)
+        {
+            musicToggle.onValueChanged.AddListener(GameManager.instance.ToggleMusic);
+        }
 
     }
 }
