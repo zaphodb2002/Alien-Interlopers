@@ -19,7 +19,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] int minimumBarricadeWidth = 16; //This includes 2 blocks on either side for padding
     [Range(0, 1)]
     [SerializeField] float randomEnemyChance = 0.1f;
-    
+    [SerializeField] float timeUntilDeath = 1f;
+
     [SerializeField] Transform[] enemyPrefabs = null;
     [SerializeField] Transform randomEnemyPrefab = null;
 
@@ -63,6 +64,11 @@ public class EnemyManager : MonoBehaviour
         {
             if (enemies.Count == 0)
             {
+                var shots = GameObject.FindGameObjectsWithTag("Projectile");
+                foreach (var shot in shots)
+                {
+                    Destroy(shot);
+                }
                 speed = baseSpeed + (wavesActivated * speedStep);
                 if (fireDelay >= minFireDelay)
                 {
@@ -177,6 +183,18 @@ public class EnemyManager : MonoBehaviour
     public void DoPlayerDeath()
     {
         runEnemyMove = false;
+        StartCoroutine(DeathRoutine());
+    }
+
+    
+    private IEnumerator DeathRoutine()
+    {
+        while (timeUntilDeath > 0f)
+        {
+            timeUntilDeath -= Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
         GameManager.instance.LoadGameOver();
     }
 

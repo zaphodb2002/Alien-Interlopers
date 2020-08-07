@@ -86,6 +86,8 @@ public class Player : MonoBehaviour
         currentSpeed = playerSpeed + (level * speedStep);
     }
 
+    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Projectile" && collision.gameObject.GetComponent<Shot>().isEnemyShot)
@@ -93,6 +95,7 @@ public class Player : MonoBehaviour
             AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position);
             EnemyManager.instance.ExplodeAt(transform.position);
             EnemyManager.instance.DoPlayerDeath();
+            gameObject.SetActive(false);
         }
     }
 }
