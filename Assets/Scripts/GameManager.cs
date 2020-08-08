@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     public float ScreenWidthInUnits { get => screenWidthInUnits; }
     public float HalfScreenWidthInUnits { get => halfScreenWidthInUnits; set => halfScreenWidthInUnits = value; }
 
+    public int highScore = 0;
+
     private AudioSource audioSource;
 
     private void Awake()

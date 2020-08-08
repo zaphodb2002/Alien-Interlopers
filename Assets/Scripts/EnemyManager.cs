@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager instance;
 
     
-    public float score = 0;
+    public int score = 0;
     [SerializeField] float baseSpeed = 1f;
     [SerializeField] float speedStep = 0.1f;
     [SerializeField] float fireStep = 0.1f;
@@ -183,6 +183,10 @@ public class EnemyManager : MonoBehaviour
     public void DoPlayerDeath()
     {
         runEnemyMove = false;
+        if (score > GameManager.instance.highScore)
+        {
+            GameManager.instance.highScore = score;
+        }
         StartCoroutine(DeathRoutine());
     }
 
