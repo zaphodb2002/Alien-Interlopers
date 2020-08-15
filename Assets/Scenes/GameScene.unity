@@ -558,6 +558,7 @@ GameObject:
   - component: {fileID: 516461818}
   - component: {fileID: 516461820}
   - component: {fileID: 516461819}
+  - component: {fileID: 516461821}
   m_Layer: 5
   m_Name: Wave
   m_TagString: Untagged
@@ -706,6 +707,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516461817}
   m_CullTransparentMesh: 0
+--- !u!95 &516461821
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516461817}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a835421cef54d794f8320d2bd6bc2809, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +820,7 @@ GameObject:
   - component: {fileID: 1510052980}
   - component: {fileID: 1510052982}
   - component: {fileID: 1510052981}
+  - component: {fileID: 1510052983}
   m_Layer: 5
   m_Name: Score
   m_TagString: Untagged
@@ -946,6 +967,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510052979}
   m_CullTransparentMesh: 0
+--- !u!95 &1510052983
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510052979}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a835421cef54d794f8320d2bd6bc2809, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!224 &1520749550 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5231587461511070790, guid: 484662f438cc080458b66efd1c4fb105,
@@ -1095,7 +1135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46d29c2d74ab6043bdc92187519bfa2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
   baseSpeed: 1
   speedStep: 0.1
   fireStep: 0.1
@@ -1103,6 +1142,7 @@ MonoBehaviour:
   minFireDelay: 0.5
   minimumBarricadeWidth: 16
   randomEnemyChance: 0.1
+  timeUntilDeath: 1
   enemyPrefabs:
   - {fileID: 8616100962133287229, guid: 5cf72cd90e930a44a914728a32a7bcb9, type: 3}
   - {fileID: 8616100962133287229, guid: 6b30afc4450b7774a92c98f1edb24f06, type: 3}
@@ -1315,6 +1355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7448bff534e7f1f4db361cf10c8143c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  highScore: 0
 --- !u!1001 &1709622354936470755
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
     public static EnemyManager instance;
 
     
-    public int score = 0;
+    private int score = 0;
     [SerializeField] float baseSpeed = 1f;
     [SerializeField] float speedStep = 0.1f;
     [SerializeField] float fireStep = 0.1f;
@@ -54,6 +54,8 @@ public class EnemyManager : MonoBehaviour
     }
     private void Start()
     {
+        scoreUi.text = score.ToString();
+        waveUi.text = wavesActivated.ToString();
         CreateBarricades(3);
         StartCoroutine(RandomEnemySpawn());
     }
@@ -79,16 +81,25 @@ public class EnemyManager : MonoBehaviour
                 CreateWave(3);
                 wavesActivated++;
                 waveUi.text = wavesActivated.ToString();
+                waveUi.GetComponent<Animator>().SetTrigger("Bounce");
             }
             else
             {
-                scoreUi.text = score.ToString();
+                //scoreUi.text = score.ToString();
                 MoveEnemies(speed);
                 HandleWeaponsFire();
             }
         }
-
     }
+
+    public void AddScore(int value)
+    {
+        score += value;
+        scoreUi.text = score.ToString();
+        scoreUi.GetComponent<Animator>().SetTrigger("Bounce");
+    }
+
+    
 
     public void ExplodeAt(Vector3 position)
     {

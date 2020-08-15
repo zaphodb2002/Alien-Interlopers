@@ -88,7 +88,7 @@ public class Enemy : MonoBehaviour
         {
             EnemyManager.instance.ExplodeAt(transform.position);
             AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, 100f);
-            EnemyManager.instance.score += scoreValue;
+            EnemyManager.instance.AddScore(scoreValue);
             EnemyManager.instance.RemoveEnemy(this);
             Destroy(collision.gameObject);
             Destroy(gameObject);
